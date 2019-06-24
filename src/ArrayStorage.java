@@ -20,17 +20,18 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {   // работает, не проходит тестирование
-        Resume resumeGet = null;
-        resumeGet.uuid = "нет такого значения";
         Resume resume = null;
-        for (int i = 0; i < storage.length; i++){
+        for (int i = 0; i<storage.length; i++){
             resume = storage[i];
             if (resume.uuid == uuid){
-                resumeGet = resume;
                 break;
             }
+            else {
+                resume.uuid = "null";
+                System.out.println(" Нет такого значения");
+            }
         }
-        return resumeGet;
+        return resume;
     }
 
     void delete(String uuid) {    //работает
