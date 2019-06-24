@@ -2,51 +2,66 @@
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
+    Resume[] storage = new Resume[10];
 
-    void clear() {
+    void clear() {              // работает
         for (int i = 0; i<storage.length; i++){
             storage[i] = null;
         }
     }
 
-    void save(Resume r) {
-        for (int i = 0; i < storage.length; i++){
-            if (r != null){
+    void save(Resume r) {        // работает
+        for (int i = 0; i<storage.length; i++){
+            if (storage[i] == null){
                 storage[i] = r;
+                break;
             }
         }
     }
 
-    Resume get(String uuid) {
+    Resume get(String uuid) {   // работает, не проходит тестирование
+        Resume resumeGet = null;
+        resumeGet.uuid = "нет такого значения";
         Resume resume = null;
         for (int i = 0; i < storage.length; i++){
-            if (storage[i].equals(uuid)){
-                resume = storage[i];
+            resume = storage[i];
+            if (resume.uuid == uuid){
+                resumeGet = resume;
+                break;
             }
         }
-        return resume;
+        return resumeGet;
     }
 
-    void delete(String uuid) {
+    void delete(String uuid) {    //работает
+        int namberArray = 0;
+        Resume resume = null;
         for (int i = 0; i < storage.length; i++){
-            if (storage[i].equals(uuid)){
+            resume = storage[i];
+            if (resume.uuid.equals(uuid)){
                 storage[i] = null;
-                for (int j = i; j < storage.length; j++){
-                    storage[j] = storage[j+1];
-                }
+                i = namberArray;
+                break;
+            }
+
+        }
+        for (int i = namberArray; i<storage.length; i++){
+            storage[i] = storage[i+1];
+            if (storage[i+1]==null){
+                break;
             }
         }
     }
+
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll() {
+    Resume[] getAll() {       //работает
         return storage;
     }
 
-    int size() {
+    int size() {      // работает
         int count = 0;
         for (int i = 0; i < storage.length; i++){
             if (storage[i] != null){
