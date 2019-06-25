@@ -21,15 +21,13 @@ public class ArrayStorage {
 
     Resume get(String uuid) {   // работает, не проходит тестирование
         Resume resume = null;
+        resume.uuid = uuid;
+        Resume resumeGet = null;
         for (int i = 0; i<storage.length; i++){
-            resume = storage[i];
-            if (resume.uuid == uuid){
+            storage[i] = resumeGet;
+            if (resume.uuid == resumeGet.uuid){
                 break;
-            }
-            else {
-                resume.uuid = "null";
-                System.out.println(" Нет такого значения");
-            }
+            } else {resume.uuid = null;}
         }
         return resume;
     }
